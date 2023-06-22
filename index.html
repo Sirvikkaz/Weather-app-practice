@@ -4,85 +4,13 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-   <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./Css/font-awesome.min.css">
+    <link rel="stylesheet" href="main.css">
     <title>Weather App</title>
-    <style>
-        body{
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-            background-color: #222;
-            color: white;
-            background-image: url("https://source.unsplash.com/1600x900/?landscape");
-            font-family: 'Open Sans', sans-serif;
-            font-size: 120%;
-        }
-        .card{
-            background-color: #000000d0;
-            padding: 2em;
-            border-radius: 30px;
-            width: 100%;
-            max-width: 420px;
-            margin: 1em;
-        }
-        .search{
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        button{
-            margin:0.5em;
-            border-radius: 50%;
-            border: none;
-            height: 44px;
-            width: 44px;
-            outline: none;
-            background-color: #7c7c7c2b;
-        }
-        button:hover{
-            background-color: #7c7c7c6b;
-            cursor: pointer;
-            transition: 0.7s ease-in-out;
-        }
-        input.search-bar{
-            border: none;
-            outline: none;
-            padding: 0.4em 1em;
-            border-radius: 23px;
-            background-color: #7c7c7c2b;
-            color: white;
-            font-family: inherit;
-            font-size: 105%;
-            width: calc(100% - 50px );
-        }
-        h2.temp{
-            margin:0;
-        }
-        /*.weather{
-            text-transform: capitalize;
-        }*/
-        .flex{
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            width: 150px;
-        }
-        .weather.loading{
-            visibility: hidden;
-            display: none;
-        }
-        /*.weather.loading:after{
-            visibility: visible;
-            content: "Loading";
-            display: block;
-        }*/
-    </style>
 </head>
 <body>
     <div class="card">
@@ -103,51 +31,9 @@
             <div class="wind">speed: 6.2 km/h</div>
         </div>
     </div>
-    <script defer>
+    <script src="app.js">
         //You must understand api by fire by force
-        //create an object necessary for the weather api
-        let weather = {
-            "apiKey":"0067023a5d51cc75b942bd79a3a3f5b8",
-            fetchWeather: function(city){
-                fetch('https://api.openweathermap.org/data/2.5/weather?q='
-                + city
-                +'&units=metric&appid='+
-                this.apiKey
-                )
-            .then(response=>response.json())
-            .then(data=>weather.displayWeather(data)) //we wont console.log data since we want to use the data practically this time around;
-            /*then(data=>weather.displayWeather(data)) this code will pass the data to the displayWeather function,which will then store only 
-            the necessary data*/
-            .catch(err=>(console.log(err)))
-            },
-            displayWeather: function(data){
-                const {name} = data; // const name = data.name
-                const {description, icon} = data.weather[0] //const description = data.weather['description'], const icon = data.weather['icon']
-                const {temp, humidity} = data.main
-                const {speed} = data.wind;
-                console.log(name,description,icon,temp,humidity,speed)
-                document.querySelector('.temp').innerHTML = temp + '°C';
-                document.querySelector('.city').innerHTML = 'Weather in ' + name;
-                document.querySelector('.icon').src = "https://openweathermap.org/img/wn/" +  icon + "@2x.png"; 
-                document.querySelector('.description').innerHTML = description;
-                document.querySelector('.humidity').innerHTML = 'Humidity :' + humidity + '%';
-                document.querySelector('.wind').innerHTML = "Speed :" + speed + 'Km/h';
-                document.querySelector('.weather').classList.remove('loading')
-            },
-            search: function(){
-                weather.fetchWeather(document.querySelector('.search-bar').value)
-            }
-        }
-        document.querySelector('.search button').addEventListener('click', function(){
-            weather.search()
-        })
-        //making the enter key also work for search
-        document.querySelector('.search-bar').addEventListener('keyup', function(event){
-            if(event.key == 'Enter'){
-                weather.search()
-            }
-        })
-        weather.fetchWeather('Akure')
+        //create an object necessary for the weather api  
     </script>
 </body>
 </html>
